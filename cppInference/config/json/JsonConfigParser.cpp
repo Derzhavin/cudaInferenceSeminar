@@ -59,7 +59,7 @@ bool ObjectDetectorJsonParser::parseJson(nlohmann::json &json_obj, Config &confi
     return true;
 }
 
-bool CullingJsonParser::parseJson(nlohmann::json &json_obj, Config &config) {
+bool CullingDetectionsJsonParser::parseJson(nlohmann::json &json_obj, Config &config) {
     auto culling_json = json_obj["CullingDetections"];
 
     config.scores_threshold = culling_json["ScoresThreshold"];

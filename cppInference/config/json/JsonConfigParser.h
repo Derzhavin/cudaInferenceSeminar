@@ -30,10 +30,10 @@ public:
     bool parseJson(nlohmann::json& json_obj, Config& config) override;
 };
 
-class CullingJsonParser: public IJsonConfigParser
+class CullingDetectionsJsonParser: public IJsonConfigParser
 {
 public:
-    CullingJsonParser() = default;
+    CullingDetectionsJsonParser() = default;
     bool parseJson(nlohmann::json& json_obj, Config& config) override;
 };
 

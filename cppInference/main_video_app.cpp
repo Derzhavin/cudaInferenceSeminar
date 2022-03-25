@@ -20,7 +20,7 @@ int main(int argc, char *argv[]) {
     {
         new ObjectDetectorJsonParser(),
         new FileCaptureJsonParser(),
-        new CullingJsonParser()
+        new CullingDetectionsJsonParser()
     };
     JsonConfigParser json_config_parser(parsers);
 

@@ -52,5 +52,4 @@ target_link_libraries(
         nvinfer
         nvinfer_plugin
         nlohmann_json::nlohmann_json
-        stdc++fs
 )
