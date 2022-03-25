@@ -1,0 +1,18 @@
+{
+  "ObjectDetection":
+  {
+    "EnginePath" : "/media/denis/Seagate3/successfull_batch_models/my_efficientdet_d0_coco17_tpu-32_batch_of_8.engine",
+    "BatchSize" : 8,
+    "UseCudaGraph" : false,
+    "Classes" : ["cat", "dog", "monkey"]
+  },
+  "FileCapture":
+  {
+    "Path" : "/media/denis/Seagate3/Datasets/mvd_spb_dataset/sources/1075_h264_1280x720.mp4",
+    "FramesBufferSize" : 32
+  },
+  "CullingDetections" :
+  {
+    "ScoresThreshold": 0.6
+  }
+}
