@@ -124,11 +124,8 @@ void App<    VideoCaptureImpl,
                 if (checkGeometry(y_min, x_min, y_max, x_max))
                 {
                     const auto frame_no = obj_i / _objects_detector.detectionsNum();
-
                     cv::Rect frame_rect(x_min, y_min, x_max - x_min, y_max - y_min);
-
                     const auto cls = detected_objects_info.classes()[obj_i];
-
                     auto p1 = cv::Point(x_min, y_min);
                     auto p2 = cv::Point(x_max, y_max);
                     cv::rectangle(frames[frame_no], p1, p2, rect_colour, 2);
