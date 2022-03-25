@@ -30,7 +30,7 @@ file(GLOB APP_SOURCES
         "videoio/*.cpp"
         "videoio/codec/*.cpp"
         "detection/*.cpp"
-        "detection/common/*.cpp"
+        "common/*.cpp"
         "config/*.cpp"
         "config/json/*.cpp"
         "main_video_app.cpp"
@@ -52,4 +52,19 @@ target_link_libraries(
         nvinfer
         nvinfer_plugin
         nlohmann_json::nlohmann_json
+)
+
+cuda_add_executable(mnist_digits main_mnist_digits.cpp common/logger.cpp common/util.cpp)
+target_include_directories(
+        mnist_digits
+        PUBLIC
+        ${OpenCV_INCLUDE_DIRS}
+        ${CMAKE_CUDA_TOOLKIT_INCLUDE_DIRECTORIES}
+)
+target_link_libraries(
+        mnist_digits
+        opencv_core
+        opencv_imgcodecs
+        nvinfer
+        nvinfer_plugin
 )
