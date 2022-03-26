@@ -5,7 +5,6 @@
 #include <opencv2/imgcodecs.hpp>
 #include <fstream>
 #include <NvInferRuntime.h>
-#include "NvInferPlugin.h"
 #include <common/util.h>
 #include <common/logger.h>
 #include <opencv2/imgproc.hpp>
@@ -33,7 +32,6 @@ int main(int argc, char *argv[])
     engine_file_stream.read(engine_data.data(), file_size);
 
     util::UniquePtr<nvinfer1::IRuntime> runtime{nvinfer1::createInferRuntime(sample::gLogger.getTRTLogger())};
-    initLibNvInferPlugins(nullptr, "");
 
     util::UniquePtr<nvinfer1::ICudaEngine> engine;
     engine.reset(runtime->deserializeCudaEngine(engine_data.data(), engine_data.size(), nullptr));
