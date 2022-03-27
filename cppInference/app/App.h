@@ -87,12 +87,26 @@ void App<    VideoCaptureImpl,
     {
         std::vector<cv::Mat> frames(_config.batch_size);
 
+        bool end_of_stream = false;
         for (int i = 0; i < _config.batch_size; ++i)
         {
-            while (frames[i].empty())
+            if (end_of_stream)
+            {
+                frames[i] = frames[i].clone();
+            }
+            else
             {
                 _video_capture.readFrame(frames[i]);
             }
+            if (frames[i].empty())
+            {
+                if (i == 0)
+                    return;
+
+                end_of_stream = true;
+                frames[i] = frames[i - 1].clone();
+            }
+
             cv::resize(frames[i], resized_frame, cv::Size(cnn_input_w, cnn_input_h), cv::INTER_CUBIC);
             resized_frame.convertTo(cnn_batch_input[i], CV_32FC3);
         }
@@ -140,6 +154,9 @@ void App<    VideoCaptureImpl,
             if(cv::waitKey(1) == 'q')
                 return;
         }
+
+        if (end_of_stream)
+            return;
     }
 }
 

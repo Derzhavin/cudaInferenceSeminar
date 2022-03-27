@@ -1,15 +1,16 @@
 {
   "ObjectDetection":
   {
-    "EnginePath" : "/media/denis/Seagate3/successfull_batch_models/my_efficientdet_d0_coco17_tpu-32_batch_of_8.engine",
-    "BatchSize" : 8,
+    "EnginePath" : "/media/denis/Seagate3/Projects/cudaInferenceSeminar/models/my_efficientdet_d0_coco17_tpu-32_batch_of_4.engine",
+    "BatchSize" : 4,
     "UseCudaGraph" : false,
-    "Classes" : ["cat", "dog", "monkey"]
+    "Classes" : ["car", "bus", "truck"],
+    "InputTensor" : "input_tensor:0"
   },
   "FileCapture":
   {
-    "Path" : "/media/denis/Seagate3/Datasets/mvd_spb_dataset/sources/1075_h264_1280x720.mp4",
-    "FramesBufferSize" : 32
+    "Path" : "/media/denis/Seagate3/Projects/cudaInferenceSeminar/data/cars0.mp4",
+    "FramesBufferSize" : 64
   },
   "CullingDetections" :
   {
