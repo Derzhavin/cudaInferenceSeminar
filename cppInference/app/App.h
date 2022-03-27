@@ -121,21 +121,24 @@ void App<    VideoCaptureImpl,
                 const float y_max = (float)frame_height * detected_objects_info.boxes()[obj_i * 4 + 2];
                 const float x_max = (float)frame_width * detected_objects_info.boxes() [obj_i * 4 + 3];
 
-                if (checkGeometry(y_min, x_min, y_max, x_max))
+                const auto cls = detected_objects_info.classes()[obj_i];
+
+                if (checkGeometry(y_min, x_min, y_max, x_max) && cls < _config.classes.size())
                 {
                     const auto frame_no = obj_i / _objects_detector.detectionsNum();
                     cv::Rect frame_rect(x_min, y_min, x_max - x_min, y_max - y_min);
-                    const auto cls = detected_objects_info.classes()[obj_i];
                     auto p1 = cv::Point(x_min, y_min);
                     auto p2 = cv::Point(x_max, y_max);
                     cv::rectangle(frames[frame_no], p1, p2, rect_colour, 2);
-                    cv::putText(frames[frame_no], _config.classes[(size_t)cls], p1, cv::FONT_HERSHEY_DUPLEX, 2, text_colour, false);
-                    cv::imshow("frame", frames[frame_no]);
-
-                    if(cv::waitKey(1) == 'q')
-                        return;
+                    cv::putText(frames[frame_no], _config.classes[cls], p1, cv::FONT_HERSHEY_DUPLEX, 2, text_colour, false);
                 }
             }
+        }
+        for (int i = 0; i < _config.batch_size; ++i)
+        {
+            cv::imshow("frame", frames[i]);
+            if(cv::waitKey(1) == 'q')
+                return;
         }
     }
 }
