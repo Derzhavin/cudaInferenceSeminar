@@ -41,11 +41,11 @@ int main(int argc, char *argv[])
     if (!(context = util::UniquePtr<nvinfer1::IExecutionContext>(engine->createExecutionContext())))
         return 0;
 
-    int32_t input_layer_id = engine->getBindingIndex("input_1");
+    int32_t input_layer_id = engine->getBindingIndex("flatten_input:0");
 
     context->setBindingDimensions(input_layer_id, engine->getBindingDimensions(input_layer_id));
 
-    auto output_layer_id = engine->getBindingIndex("output_1");
+    auto output_layer_id = engine->getBindingIndex("Identity:0");
 
     void* gpu_input_layer_mem;
     void* gpu_output_layer_mem;
