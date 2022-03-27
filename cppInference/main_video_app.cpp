@@ -32,7 +32,7 @@ int main(int argc, char *argv[]) {
 
     FileCapture video_capture(config.file_capture_path, config.frames_buffer_size);
 
-    TfObjDetApiDetector objects_detector(config.engine_file_path, config.use_cuda_graph);
+    TfObjDetApiDetector objects_detector(config.engine_file_path, config.input_tensor, config.use_cuda_graph);
 
     App< decltype(video_capture), decltype(objects_detector)> app(config, video_capture, objects_detector);
     app.run();

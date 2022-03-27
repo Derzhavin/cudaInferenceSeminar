@@ -93,7 +93,7 @@ void App<    VideoCaptureImpl,
             {
                 _video_capture.readFrame(frames[i]);
             }
-            cv::resize(frames[i], resized_frame, cv::Size(cnn_input_w, cnn_input_h));
+            cv::resize(frames[i], resized_frame, cv::Size(cnn_input_w, cnn_input_h), cv::INTER_CUBIC);
             resized_frame.convertTo(cnn_batch_input[i], CV_32FC3);
         }
 

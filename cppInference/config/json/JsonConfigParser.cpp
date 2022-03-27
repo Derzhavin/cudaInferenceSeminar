@@ -56,6 +56,9 @@ bool ObjectDetectorJsonParser::parseJson(nlohmann::json &json_obj, Config &confi
     {
         config.classes.push_back(cls);
     }
+
+    config.input_tensor = object_detection_json["InputTensor"];
+
     return true;
 }
 

@@ -8,7 +8,6 @@
 #include <fstream>
 #include "common/logger.h"
 
-const char* TfObjDetApiDetector::input_layer_name = "input_tensor:0";
 const char* TfObjDetApiDetector::output_layer_num_detections_name = "num_detections";
 const char* TfObjDetApiDetector::output_layer_detection_boxes = "detection_boxes";
 const char* TfObjDetApiDetector::output_layer_detection_scores = "detection_scores";
@@ -26,25 +25,26 @@ unsigned int TfObjDetApiDetector::detectionsNumImpl()
 
 unsigned int TfObjDetApiDetector::inputImgWidthImpl() const
 {
-    unsigned int input_layer_id = _engine->getBindingIndex(input_layer_name);
+    unsigned int input_layer_id = _engine->getBindingIndex(_input_layer_name.c_str());
     auto dims = _engine->getBindingDimensions(input_layer_id);
     return dims.d[1];
 }
 
 unsigned int TfObjDetApiDetector::inputImgHeightImpl() const
 {
-    unsigned int input_layer_id = _engine->getBindingIndex(input_layer_name);
+    unsigned int input_layer_id = _engine->getBindingIndex(_input_layer_name.c_str());
     auto dims = _engine->getBindingDimensions(input_layer_id);
     return dims.d[2];
 }
 
-TfObjDetApiDetector::TfObjDetApiDetector(const std::string &filename, bool use_cuda_graph):
+TfObjDetApiDetector::TfObjDetApiDetector(const std::string &filename, const std::string& input_tensor, bool use_cuda_graph):
         _ready(false),
         _gpu_input_layer_mem(nullptr),
         _gpu_detection_boxes_mem(nullptr),
         _gpu_detection_classes_mem(nullptr),
         _gpu_num_detections_mem(nullptr),
         _gpu_detection_scores_mem(nullptr),
+        _input_layer_name(input_tensor),
         _cudaStream(nullptr),
         _engine(nullptr),
         _use_cuda_graph(use_cuda_graph),
@@ -109,7 +109,7 @@ bool TfObjDetApiDetector::createContext()
 
 bool TfObjDetApiDetector::createBindings()
 {
-    int32_t input_layer_id = _engine->getBindingIndex(input_layer_name);
+    int32_t input_layer_id = _engine->getBindingIndex(_input_layer_name.c_str());
 
     if (input_layer_id == -1)
         return false;

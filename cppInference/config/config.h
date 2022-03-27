@@ -17,6 +17,7 @@ struct Config
     bool use_cuda_graph;
     std::string engine_file_path;
     std::string file_capture_path;
+    std::string input_tensor;
     std::vector<std::string> classes;
 };
 

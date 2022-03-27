@@ -43,6 +43,8 @@ class TfObjDetApiDetector: public IObjectDetector<TfObjDetApiDetector>
     int32_t _detection_scores_size;
     int32_t _detection_classes_size;
 
+    std::string _input_layer_name;
+
     bool isReadyImpl() const;
     unsigned int inputImgWidthImpl() const;
     unsigned int inputImgHeightImpl() const;
@@ -55,13 +57,12 @@ class TfObjDetApiDetector: public IObjectDetector<TfObjDetApiDetector>
     bool createBindings();
 
 public:
-    static const char* input_layer_name;
     static const char* output_layer_num_detections_name;
     static const char* output_layer_detection_boxes;
     static const char* output_layer_detection_scores;
     static const char* output_layer_detection_classes;
     static const short num_detections;
-    explicit TfObjDetApiDetector(const std::string& filename, bool use_cuda_graph = false);
+    explicit TfObjDetApiDetector(const std::string& filename, const std::string& input_tensor, bool use_cuda_graph = false);
     ~TfObjDetApiDetector();
 };
 
