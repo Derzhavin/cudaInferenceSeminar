@@ -63,7 +63,7 @@ int main(int argc, char *argv[])
     std::string image_filename(argv[2]);
     cv::Mat img = cv::imread(image_filename, cv::IMREAD_GRAYSCALE), normalized_img;
     cv::resize(img, img, cv::Size(28, 28), cv::INTER_CUBIC);
-    img.convertTo(normalized_img, CV_32F);
+    img.convertTo(normalized_img, CV_32FC1);
 
     if (cudaMemcpy(gpu_input_layer_mem, (void*)normalized_img.data, input_layer_size, cudaMemcpyHostToDevice) != cudaSuccess)
         return 0;
