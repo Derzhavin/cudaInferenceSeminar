@@ -50,6 +50,11 @@ public:
     }
     inline DetectedObjectsInfo detect(void* buffer, bool& detection_status, unsigned int images_num = 1)
     {
+        if (!isReady())
+        {
+            detection_status = false;
+            return std::move(DetectedObjectsInfo());
+        }
         return impl().detectImpl(buffer, detection_status, images_num);
     }
     inline unsigned int inputImgWidth()

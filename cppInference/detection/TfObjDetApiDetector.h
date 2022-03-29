@@ -45,6 +45,8 @@ class TfObjDetApiDetector: public IObjectDetector<TfObjDetApiDetector>
 
     std::string _input_layer_name;
 
+public:
+
     bool isReadyImpl() const;
     unsigned int inputImgWidthImpl() const;
     unsigned int inputImgHeightImpl() const;
@@ -56,7 +58,6 @@ class TfObjDetApiDetector: public IObjectDetector<TfObjDetApiDetector>
     bool createContext();
     bool createBindings();
 
-public:
     static const char* output_layer_num_detections_name;
     static const char* output_layer_detection_boxes;
     static const char* output_layer_detection_scores;

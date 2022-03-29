@@ -158,7 +158,7 @@ bool TfObjDetApiDetector::createBindings()
 
 DetectedObjectsInfo TfObjDetApiDetector::detectImpl(void* buffer, bool &detection_status, unsigned int images_num) {
     detection_status = false;
-    if (!_ready || _engine->getMaxBatchSize() < images_num)
+    if (_engine->getMaxBatchSize() < images_num)
         return std::move(DetectedObjectsInfo());
 
     if (cudaMemcpyAsync(_gpu_input_layer_mem, buffer, _input_layer_size, cudaMemcpyHostToDevice, _cudaStream) != cudaSuccess)
