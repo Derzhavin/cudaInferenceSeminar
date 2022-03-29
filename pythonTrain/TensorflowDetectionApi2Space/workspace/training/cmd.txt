@@ -1,0 +1,3 @@
+--model_dir=models/my_ssd_mobilenet_v2_320x320_coco17_tpu-8 --pipeline_config_path=models/my_ssd_mobilenet_v2_320x320_coco17_tpu-8/pipeline.config
+--model_dir=models/my_ssd_mobilenet_v2_fpnlite_640x640_coco17_tpu-8 --pipeline_config_path=models/my_ssd_mobilenet_v2_fpnlite_640x640_coco17_tpu-8/pipeline.config
+--model_dir=models/my_ssd_resnet50_v1_fpn_640x640_coco17_tpu-8 --pipeline_config_path=models/my_ssd_resnet50_v1_fpn_640x640_coco17_tpu-8/pipeline.config
