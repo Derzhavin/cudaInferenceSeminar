@@ -68,3 +68,18 @@ target_link_libraries(
         nvinfer
         nvinfer_plugin
 )
+
+cuda_add_executable(mnist_digits_batch3 main_mnist_digits_batch3.cpp common/logger.cpp common/util.cpp)
+target_include_directories(
+        mnist_digits_batch3
+        PUBLIC
+        ${OpenCV_INCLUDE_DIRS}
+        ${CMAKE_CUDA_TOOLKIT_INCLUDE_DIRECTORIES}
+)
+target_link_libraries(
+        mnist_digits_batch3
+        opencv_core
+        opencv_imgcodecs
+        nvinfer
+        nvinfer_plugin
+)
