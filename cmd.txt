@@ -2,4 +2,4 @@ python3.8 -m tf2onnx.convert --saved-model mnist_digits_model --output mnist_dig
 python3.8 -m tf2onnx.convert --saved-model models/mnist_digits_model --output models/mnist_digits_model.onnx  --use-graph-names
 trtexec --onnx=../models/mnist_digits_model.onnx --buildOnly --saveEngine=../models/mnist_digits_model.engine
 
-trtexec --onnx=mnist_digits_model.onnx --buildOnly --saveEngine=mnist_digits_model_b3.engine --shapes=flatten_input:0:3x28x2
+trtexec --onnx=mnist_digits_model.onnx --buildOnly --saveEngine=mnist_digits_model_b3.engine --shapes=flatten_input:0:3x28x28
