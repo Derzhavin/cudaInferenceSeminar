@@ -68,3 +68,38 @@ bool CullingDetectionsJsonParser::parseJson(nlohmann::json &json_obj, Config &co
     config.scores_threshold = culling_json["ScoresThreshold"];
     return true;
 }
+
+bool ObjectsRecognizerJsonParser::parseJson(nlohmann::json &json_obj, Config &config) {
+
+    auto recognizer_json = json_obj["ObjectsRecognition"];
+
+    config.batch_size        = recognizer_json["BatchSize"];
+    config.engine_file_path  = recognizer_json["EnginePath"];
+    config.use_cuda_graph  = recognizer_json["UseCudaGraph"];
+
+    auto classes_json = recognizer_json["Classes"];
+
+    config.classes.clear();
+    for (auto &cls: classes_json)
+    {
+        config.classes.push_back(cls);
+    }
+
+    config.input_tensor = recognizer_json["InputTensor"];
+    config.output_tensor = recognizer_json["OutputTensor"];
+
+    return true;
+}
+
+bool ImagesReaderJsonParser::parseJson(nlohmann::json &json_obj, Config &config) {
+    auto images_reader_json = json_obj["ImagesReader"];
+    auto images_json = images_reader_json["images"];
+
+    config.images_path.clear();
+    for (auto &cls: images_json)
+    {
+        config.images_path.push_back(cls);
+    }
+
+    return true;
+}

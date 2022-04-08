@@ -14,27 +14,41 @@ class IJsonConfigParser
 {
 public:
     IJsonConfigParser() = default;
-    virtual bool parseJson(nlohmann::json& json_obj, Config& config) = 0;
+    virtual bool parseJson(nlohmann::json& json_obj, Config &config) = 0;
 };
 class ObjectDetectorJsonParser: public IJsonConfigParser
 {
 public:
     ObjectDetectorJsonParser() = default;
-    bool parseJson(nlohmann::json& json_obj, Config& config) override;
+    bool parseJson(nlohmann::json& json_obj, Config &config) override;
 };
 
 class FileCaptureJsonParser: public IJsonConfigParser
 {
 public:
     FileCaptureJsonParser() = default;
-    bool parseJson(nlohmann::json& json_obj, Config& config) override;
+    bool parseJson(nlohmann::json& json_obj, Config &config) override;
 };
 
 class CullingDetectionsJsonParser: public IJsonConfigParser
 {
 public:
     CullingDetectionsJsonParser() = default;
-    bool parseJson(nlohmann::json& json_obj, Config& config) override;
+    bool parseJson(nlohmann::json& json_obj, Config &config) override;
+};
+
+class ObjectsRecognizerJsonParser: public IJsonConfigParser
+{
+public:
+    ObjectsRecognizerJsonParser() = default;
+    bool parseJson(nlohmann::json& json_obj, Config &config) override;
+};
+
+class ImagesReaderJsonParser: public IJsonConfigParser
+{
+public:
+    ImagesReaderJsonParser() = default;
+    bool parseJson(nlohmann::json& json_obj, Config &config) override;
 };
 
 class JsonConfigParser

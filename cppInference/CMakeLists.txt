@@ -1,13 +1,13 @@
-cmake_minimum_required(VERSION 3.19)
+cmake_minimum_required(VERSION 3.16)
 project(ReportOnNeuralNetworkInference)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
-set(CMAKE_CUDA_COMPILER "/usr/local/cuda-11.2/bin/nvcc")
+set(CMAKE_CUDA_COMPILER "/usr/local/cuda-11.6/bin/nvcc")
 
 string(APPEND CMAKE_CXX_FLAGS " -std=c++17 -pthread -fPIC -fopenmp")
 string(APPEND CMAKE_C_FLAGS " -std=c11 -fPIC -fopenmp")
-string(APPEND CMAKE_CUDA_FLAGS "-cudart=shared -lcudadevrt -gencode arch=compute_75,code=sm_75 -std=c++17")
+string(APPEND CMAKE_CUDA_FLAGS "-cudart=shared -lcudadevrt -gencode arch=compute_86,code=sm_86 -std=c++17")
 
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
     MESSAGE(STATUS "debug")
@@ -19,7 +19,7 @@ else ()
 endif ()
 
 find_package(OpenCV 4.5.3 EXACT)
-find_package(CUDA 11.2 REQUIRED EXACT)
+find_package(CUDA 11.6 REQUIRED EXACT)
 find_package(nlohmann_json 3.2.0 REQUIRED)
 find_package(OpenMP)
 
@@ -82,4 +82,37 @@ target_link_libraries(
         opencv_imgcodecs
         nvinfer
         nvinfer_plugin
+)
+
+cuda_add_executable(main_recognizer main_recognizer.cpp common/logger.cpp common/util.cpp config/json/JsonConfigParser.cpp)
+target_include_directories(
+        main_recognizer
+        PUBLIC
+        ${OpenCV_INCLUDE_DIRS}
+        ${CMAKE_CUDA_TOOLKIT_INCLUDE_DIRECTORIES}
+)
+target_link_libraries(
+        main_recognizer
+        opencv_core
+        opencv_highgui
+        opencv_imgcodecs
+        nvinfer
+        nvinfer_plugin
+        OpenMP::OpenMP_CXX
+
+)
+
+cuda_add_executable(binary_classifier main_binary_classifier.cpp common/logger.cpp common/util.cpp)
+target_include_directories(
+        binary_classifier
+        PUBLIC
+        ${OpenCV_INCLUDE_DIRS}
+        ${CMAKE_CUDA_TOOLKIT_INCLUDE_DIRECTORIES}
+)
+target_link_libraries(
+        binary_classifier
+        opencv_core
+        opencv_imgcodecs
+        nvinfer
+
 )

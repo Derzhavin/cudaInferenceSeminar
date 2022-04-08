@@ -27,9 +27,9 @@ class App
 
 public:
     explicit App(
-        Config& config,
-        VideoCaptureImpl& videoCapture,
-        ObjectDetectorImpl& objects_detector
+            Config& config,
+            VideoCaptureImpl& videoCapture,
+            ObjectDetectorImpl& objects_detector
     );
     void run();
 };
@@ -38,9 +38,9 @@ template <class VideoCaptureImpl,
         class ObjectDetectorImpl>
 App<    VideoCaptureImpl,
         ObjectDetectorImpl>::App(
-            Config& config,
-            VideoCaptureImpl& videoCapture,
-            ObjectDetectorImpl& objects_detector
+        Config& config,
+        VideoCaptureImpl& videoCapture,
+        ObjectDetectorImpl& objects_detector
 ):  _config(config),
     _video_capture(videoCapture),
     _objects_detector(objects_detector)

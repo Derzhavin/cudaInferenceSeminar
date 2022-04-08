@@ -19,6 +19,8 @@ struct Config
     std::string file_capture_path;
     std::string input_tensor;
     std::vector<std::string> classes;
+    std::string output_tensor;
+    std::vector<std::string> images_path;
 };
 
 #endif //VISION_CONFIG_H
